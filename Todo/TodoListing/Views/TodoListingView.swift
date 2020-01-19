@@ -8,17 +8,26 @@
 
 import SwiftUI
 
-let todos = [
-    TodoItem(title: "Test todo #1", completed: false),
-    TodoItem(title: "Test todo #2", completed: true),
-    TodoItem(title: "Test todo #3", completed: false)
-]
-
 struct TodoListingView: View {
+    
+    @EnvironmentObject var todoStore: TodoStore
+    
     var body: some View {
-        List(todos, id: \.id) { todo in
-            TodoListItemView(item: todo)
-                .padding(.vertical)
+        NavigationView {
+            List(self.todoStore.todos) { todo in
+                Button(action: {
+                    self.todoStore.completeTodo(todoModel: todo)
+                }) {
+                    TodoListItemView(item: todo)
+                }
+            }
+            .padding(.vertical)
+            .navigationBarTitle("Todos")
+            .navigationBarItems(trailing:
+                NavigationLink(destination: TodoEditorView()) {
+                    Image(systemName: "plus.circle.fill")
+                }
+            )
         }
     }
 }

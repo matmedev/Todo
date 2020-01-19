@@ -6,6 +6,7 @@ target 'Todo' do
   use_frameworks!
 
   # Pods for Todo
+  pod 'SkeletonUI'
 
   target 'TodoTests' do
     inherit! :search_paths
