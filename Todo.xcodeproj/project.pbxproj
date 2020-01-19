@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,7 +11,7 @@
 		46A46B44680F2BA7AFEBE2A3 /* Pods_TodoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E74CABCD246021876D9789A /* Pods_TodoTests.framework */; };
 		7DDACE8AD5D3F54FE64CAC98 /* Pods_Todo_TodoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 821C09B8CF387F34D03D12B9 /* Pods_Todo_TodoUITests.framework */; };
 		8B89E2FD23D46C4800C91142 /* TodoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B89E2FC23D46C4800C91142 /* TodoStore.swift */; };
-		8B89E30023D4715000C91142 /* TodoItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B89E2FF23D4715000C91142 /* TodoItemModel.swift */; };
+		8B89E30223D4984900C91142 /* TodoItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B89E30123D4984900C91142 /* TodoItemModel.swift */; };
 		8BA1801C23D357DC00F025A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA1801B23D357DC00F025A2 /* AppDelegate.swift */; };
 		8BA1801E23D357DC00F025A2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA1801D23D357DC00F025A2 /* SceneDelegate.swift */; };
 		8BA1802123D357DC00F025A2 /* Todo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8BA1801F23D357DC00F025A2 /* Todo.xcdatamodeld */; };
@@ -49,7 +49,7 @@
 		5E74CABCD246021876D9789A /* Pods_TodoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		821C09B8CF387F34D03D12B9 /* Pods_Todo_TodoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Todo_TodoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B89E2FC23D46C4800C91142 /* TodoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoStore.swift; sourceTree = "<group>"; };
-		8B89E2FF23D4715000C91142 /* TodoItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemModel.swift; sourceTree = "<group>"; };
+		8B89E30123D4984900C91142 /* TodoItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemModel.swift; sourceTree = SOURCE_ROOT; };
 		8BA1801823D357DC00F025A2 /* Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BA1801B23D357DC00F025A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BA1801D23D357DC00F025A2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,7 +113,6 @@
 				DF3888B6C6FF6DCD4EE85464 /* Pods-TodoTests.debug.xcconfig */,
 				E78747184E1AFBFF96CD7E1D /* Pods-TodoTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -138,7 +137,7 @@
 		8B89E2FE23D4713500C91142 /* _Model */ = {
 			isa = PBXGroup;
 			children = (
-				8B89E2FF23D4715000C91142 /* TodoItemModel.swift */,
+				8B89E30123D4984900C91142 /* TodoItemModel.swift */,
 			);
 			path = _Model;
 			sourceTree = "<group>";
@@ -493,12 +492,12 @@
 				8BA1805923D37EE500F025A2 /* TodoEditorView.swift in Sources */,
 				8BA1801C23D357DC00F025A2 /* AppDelegate.swift in Sources */,
 				8BA1802123D357DC00F025A2 /* Todo.xcdatamodeld in Sources */,
-				8B89E30023D4715000C91142 /* TodoItemModel.swift in Sources */,
 				8BA1805E23D3A1FC00F025A2 /* TodoDataManager.swift in Sources */,
 				8BA1805523D35BF200F025A2 /* TodoListItemView.swift in Sources */,
 				8B89E2FD23D46C4800C91142 /* TodoStore.swift in Sources */,
 				8BA1802323D357DC00F025A2 /* TodoListingView.swift in Sources */,
 				8BA1801E23D357DC00F025A2 /* SceneDelegate.swift in Sources */,
+				8B89E30223D4984900C91142 /* TodoItemModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

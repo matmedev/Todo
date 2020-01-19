@@ -11,17 +11,33 @@ import SwiftUI
 struct TodoListingView: View {
     
     @EnvironmentObject var todoStore: TodoStore
+        
+    func removeRows(todoItem: TodoItemModel) {
+        self.todoStore.removeTodo(todoModel: todoItem)
+    }
+    
+    func removeRows(at offsets: IndexSet) {
+        offsets.forEach { index in
+            self.removeRows(todoItem: self.todoStore.todos[index])
+        }
+    }
+
     
     var body: some View {
         NavigationView {
-            List(self.todoStore.todos) { todo in
-                Button(action: {
-                    self.todoStore.completeTodo(todoModel: todo)
-                }) {
-                    TodoListItemView(item: todo)
+            VStack {
+                List {
+                    ForEach(self.todoStore.todos) { todo in
+                        Button(action: {
+                            self.todoStore.completeTodo(todoModel: todo)
+                        }) {
+                            TodoListItemView(item: todo)
+                        }
+                    }
+                    .onDelete(perform: removeRows)
                 }
+                .padding(.vertical)
             }
-            .padding(.vertical)
             .navigationBarTitle("Todos")
             .navigationBarItems(trailing:
                 NavigationLink(destination: TodoEditorView()) {
@@ -37,4 +53,3 @@ struct TodoListingView_Previews: PreviewProvider {
         TodoListingView()
     }
 }
-

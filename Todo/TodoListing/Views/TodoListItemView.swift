@@ -18,6 +18,7 @@ struct TodoListItemView: View {
                 Image(systemName: item.completed ? "checkmark.square" : "square")
                 Text(verbatim: item.title)
                     .strikethrough(item.completed)
+                    .opacity(item.completed ? 0.5 : 1)
             }
         }
     }
