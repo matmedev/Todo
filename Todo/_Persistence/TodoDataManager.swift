@@ -70,4 +70,17 @@ class TodoDataManager {
             print("Failed to update todo: \(error)")
         }
     }
+    
+    static func editTodo(id: NSManagedObjectID, title: String) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        do {
+            let managedItem = try managedContext.existingObject(with: id)
+            managedItem.setValue(title, forKey: "title")
+            try managedContext.save()
+        } catch {
+            print("Failed to update todo: \(error)")
+        }
+    }
 }

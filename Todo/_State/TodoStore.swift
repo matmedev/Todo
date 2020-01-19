@@ -42,5 +42,11 @@ class TodoStore: ObservableObject {
         TodoDataManager.completeTodo(id: todoModel.objectID!, completed: !todoModel.completed)
         loadTodosFromStore()
     }
+    
+    func editTodo(todoModel: TodoItemModel) {
+        TodoDataManager.editTodo(id: todoModel.objectID!, title: todoModel.title)
+        loadTodosFromStore()
+        
+    }
 }
 

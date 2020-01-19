@@ -10,15 +10,44 @@ import SwiftUI
 import CoreData
 
 struct TodoListItemView: View {
-    var item: TodoItemModel
+    @State var item: TodoItemModel
     
-    var body: some View {
-        VStack(alignment: .trailing) {
-            HStack(alignment: .center) {
-                Image(systemName: item.completed ? "checkmark.square" : "square")
+    @EnvironmentObject var todoStore: TodoStore
+    
+    @State var title: String = ""
+    
+    var titleView: some View {
+        if item.completed {
+            return AnyView(
                 Text(verbatim: item.title)
                     .strikethrough(item.completed)
-                    .opacity(item.completed ? 0.5 : 1)
+                    .opacity(item.completed ? 0.5 : 1.0)
+            )
+        } else {
+            return AnyView(
+                TextField("", text: self.$title, onEditingChanged: { focusGained in
+                    if !focusGained {
+                        self.item.title = self.title
+                        self.todoStore.editTodo(todoModel: self.item)
+                    }
+                })
+                .onAppear {
+                    self.title = self.item.title
+                }
+            )
+        }
+    }
+    
+    var body: some View {
+        Button(action: {
+            self.item.title = self.title
+            self.todoStore.completeTodo(todoModel: self.item)
+        }) {
+            VStack(alignment: .trailing) {
+                HStack {
+                    Image(systemName: item.completed ? "checkmark.square.fill" : "square")
+                    self.titleView
+                }
             }
         }
     }

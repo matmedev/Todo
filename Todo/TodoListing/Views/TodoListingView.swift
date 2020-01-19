@@ -28,15 +28,11 @@ struct TodoListingView: View {
             VStack {
                 List {
                     ForEach(self.todoStore.todos) { todo in
-                        Button(action: {
-                            self.todoStore.completeTodo(todoModel: todo)
-                        }) {
-                            TodoListItemView(item: todo)
-                        }
+                        TodoListItemView(item: todo)
                     }
                     .onDelete(perform: removeRows)
                 }
-                .padding(.vertical)
+                .padding(.vertical) 
             }
             .navigationBarTitle("Todos")
             .navigationBarItems(trailing:
