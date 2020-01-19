@@ -33,8 +33,14 @@ class TodoStore: ObservableObject {
         loadTodosFromStore()
     }
     
+    func removeTodo(todoModel: TodoItemModel) {
+        TodoDataManager.removeTodo(id: todoModel.objectID!)
+        loadTodosFromStore()
+    }
+    
     func completeTodo(todoModel: TodoItemModel) {
         TodoDataManager.completeTodo(id: todoModel.objectID!, completed: !todoModel.completed)
         loadTodosFromStore()
     }
 }
+

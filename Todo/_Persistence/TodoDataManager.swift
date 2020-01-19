@@ -25,8 +25,8 @@ class TodoDataManager {
             
             do {
                 try managedContext.save()
-            } catch let error as NSError {
-                print("Could not save. \(error), \(error.userInfo)")
+            } catch {
+                print("Failed to save: \(error)")
             }
         }
     }
@@ -41,9 +41,21 @@ class TodoDataManager {
             let result = try managedContext.fetch(fetchRequest) as? [TodoItem]
             return result
         } catch {
-            print("Failed to fetch todos")
+            print("Failed to fetch todos: \(error)")
         }
         return nil
+    }
+    
+    static func removeTodo(id: NSManagedObjectID) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        do {
+            let managedItem = try managedContext.existingObject(with: id)
+            managedContext.delete(managedItem)
+        } catch {
+            print("Failed to delete todo: \(error)")
+        }
     }
     
     static func completeTodo(id: NSManagedObjectID, completed: Bool) {
