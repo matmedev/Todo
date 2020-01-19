@@ -9,20 +9,28 @@
 import SwiftUI
 
 struct TodoListingView: View {
-    
     @EnvironmentObject var todoStore: TodoStore
-        
-    func removeRows(todoItem: TodoItemModel) {
-        self.todoStore.removeTodo(todoModel: todoItem)
-    }
     
+    @State var newTodoTitle: String = ""
+    @State var keyboardHeight: CGFloat = 0
+
     func removeRows(at offsets: IndexSet) {
         offsets.forEach { index in
-            self.removeRows(todoItem: self.todoStore.todos[index])
+            self.todoStore.removeTodo(todoModel: self.todoStore.todos[index])
+        }
+    }
+    
+    func setupKeyboardSubscriber() {
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { noti in
+            let value = noti.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+            self.keyboardHeight = value.height
+        }
+        
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { noti in
+            self.keyboardHeight = 0
         }
     }
 
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -32,15 +40,32 @@ struct TodoListingView: View {
                     }
                     .onDelete(perform: removeRows)
                 }
-                .padding(.vertical) 
+                .padding(.vertical)
+                .onTapGesture {
+                    self.endEditing()
+                }
+                
+                HStack {
+                    TextField("What should be done?", text: $newTodoTitle)
+                        .onAppear(perform: setupKeyboardSubscriber)
+                    Button(action: {
+                        self.todoStore.createTodo(todoModel: TodoItemModel(title: self.newTodoTitle))
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                        Text("Add")
+                    }
+                }
+                .padding(.all)
+                .background(Color.white)
+                .offset(y: -self.keyboardHeight)
+                .animation(.spring())
             }
             .navigationBarTitle("Todos")
-            .navigationBarItems(trailing:
-                NavigationLink(destination: TodoEditorView()) {
-                    Image(systemName: "plus.circle.fill")
-                }
-            )
         }
+    }
+    
+    private func endEditing() {
+        UIApplication.shared.endEditing()
     }
 }
 
