@@ -27,8 +27,7 @@ struct TodoListItemView: View {
             return AnyView(
                 TextField("", text: self.$title, onEditingChanged: { focusGained in
                     if !focusGained {
-                        self.item.title = self.title
-                        self.todoStore.editTodo(todoModel: self.item)
+                        self.todoStore.editTodo(todoModel: TodoItemModel(id: self.item.id, objectID: self.item.objectID, title: self.title, completed: self.item.completed))
                     }
                 })
                 .onAppear {
