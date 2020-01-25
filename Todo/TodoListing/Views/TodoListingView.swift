@@ -34,22 +34,32 @@ struct TodoListingView: View {
     var body: some View {
         NavigationView {
             VStack {
-                List {
-                    ForEach(self.todoStore.todos) { todo in
-                        TodoListItemView(item: todo)
+                Group {
+                    if self.todoStore.todos.count > 0 {
+                        List {
+                            ForEach(self.todoStore.todos) { todo in
+                                TodoListItemView(item: todo)
+                            }
+                            .onDelete(perform: removeRows)
+                        }
+                        .padding(.vertical)
+                    } else {
+                       VStack {
+                        Image(systemName: "hand.thumbsup.fill")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                        Text("Great, you have nothing to do at the moment")
+                       }
+                       .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                     }
-                    .onDelete(perform: removeRows)
                 }
-                .padding(.vertical)
-                .onTapGesture {
-                    self.endEditing()
-                }
-                
-                HStack {
+
+                HStack(alignment: .bottom) {
                     TextField("What should be done?", text: $newTodoTitle)
                         .onAppear(perform: setupKeyboardSubscriber)
                     Button(action: {
                         self.todoStore.createTodo(todoModel: TodoItemModel(title: self.newTodoTitle))
+                        self.newTodoTitle = ""
                     }) {
                         Image(systemName: "plus.circle.fill")
                         Text("Add")
@@ -57,10 +67,14 @@ struct TodoListingView: View {
                 }
                 .padding(.all)
                 .background(Color.white)
-                .offset(y: -self.keyboardHeight)
                 .animation(.spring())
+                .offset(y: -self.keyboardHeight)
             }
             .navigationBarTitle("Todos")
+
+        }
+        .onTapGesture {
+            self.endEditing()
         }
     }
     
